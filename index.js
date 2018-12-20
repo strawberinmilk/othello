@@ -1,15 +1,15 @@
 'use strict'
 const othello = []
-let nextUser = "black"
-let notNextUser = "white"
+let nextUser = "rotateY(0deg)"
+let notNextUser = "rotateY(180deg)"
 const first = ()=>{
   for(let i=0;i<10;i++){
     othello.push([])
     let flag = (i==0||i==9) ? true : false
     for(let ii=0;ii<10;ii++){
       let push = flag || ii==0 || ii==9 ? "out" : null
-      if((i==4&&ii==5)||(i==5&&ii==4))push = "black"
-      if((i==4&&ii==4)||(i==5&&ii==5))push = "white"
+      if((i==4&&ii==5)||(i==5&&ii==4))push = "rotateY(0deg)"
+      if((i==4&&ii==4)||(i==5&&ii==5))push = "rotateY(180deg)"
       othello[othello.length-1].push(push)
     }
   }
@@ -20,7 +20,7 @@ const print = ()=>{
   for(let i=1;i<9;i++){
     for(let ii=1;ii<9;ii++){
       if(othello[i][ii]!=null){
-        $(`#s${i}${ii}`).css('background-color',othello[i][ii])
+        $(`#s${i}${ii}`).css('transform',othello[i][ii])
       }
     }
   }
@@ -161,8 +161,8 @@ const search = (y,x)=>{
 }
 
 
-$(".stone").on('click', function() {
-  let clickId = $(this).attr('id').replace(/s/,"").split("")
+$(".square").on('click', function() {
+  let clickId = $(this).find(".stone").attr('id').replace(/s/,"").split("")
   let searchResult = search(clickId[0],clickId[1])
   if(!searchResult[0]){
     return
