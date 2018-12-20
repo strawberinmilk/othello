@@ -1,7 +1,8 @@
 'use strict'
 const othello = []
-let nextUser = "rotateY(0deg)"
-let notNextUser = "rotateY(180deg)"
+let nextUser = "rotateY(0deg)",
+    notNextUser = "rotateY(180deg)";
+
 const first = ()=>{
   for(let i=0;i<10;i++){
     othello.push([])
@@ -164,15 +165,37 @@ const search = (y,x)=>{
 $(".square").on('click', function() {
   let clickId = $(this).find(".stone").attr('id').replace(/s/,"").split("")
   let searchResult = search(clickId[0],clickId[1])
+  $(this).removeClass("available");
   if(!searchResult[0]){
-    return
+    generateAndPlaySound("error");
+    return false;
   }
   othello[clickId[0]][clickId[1]] = nextUser
-  console.log(searchResult[0].x)
+  console.log(nextUser);
   print()
   for(let s of searchResult) othello[s.y][s.x] = nextUser
   print()
+  generateAndPlaySound("place");
   let tmp = nextUser
   nextUser = notNextUser
   notNextUser = tmp
 });
+
+$(".square").mouseenter(function(){
+  let clickId = $(this).find(".stone").attr('id').replace(/s/,"").split("");
+  let searchResult = search(clickId[0],clickId[1])
+  if(!searchResult[0]){
+    return false;
+  }else{
+    $(this).addClass("available");
+  }
+});
+
+$(".square").mouseout(function(){
+  $(this).removeClass("available");
+});
+
+function generateAndPlaySound(sound){
+  sound = new Audio("./sounds/" + sound + ".mp3");
+  sound.play();
+};
