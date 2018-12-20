@@ -4,6 +4,7 @@ body{
 
 body *{
   font-family: 'Geo', sans-serif;
+  transition: 0.8s ease-in-out;
 }
 
 .wrapper.white{
@@ -114,6 +115,10 @@ main{
   box-sizing: border-box;
   border: solid 1px #ffffff;
   animation: availablePanel infinite ease 0.8s;
+}
+
+.white .available:before{
+  border: solid 1px #212121;
 }
 
 @keyframes availablePanel{

@@ -195,6 +195,15 @@ $(".square").mouseout(function(){
   $(this).removeClass("available");
 });
 
+$(window).click(function(e){
+  console.log(e.target);
+  
+  if(e.target === $("main")[0]){
+    $(".wrapper").toggleClass("black");
+    $(".wrapper").toggleClass("white");
+  }
+})
+
 function generateAndPlaySound(sound){
   sound = new Audio("./sounds/" + sound + ".mp3");
   sound.play();
