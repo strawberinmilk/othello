@@ -1,5 +1,13 @@
+html {
+  -webkit-app-region: drag;
+  height: calc(100% - (2px * 2));
+  width:  calc(100% - (2px * 2));
+}
+
 body{
   margin: 0;
+  height: 100%;
+  width:  100%;
 }
 
 body *{
