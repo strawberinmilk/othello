@@ -1,0 +1,22 @@
+{
+  "name": "othello",
+  "description": "othello",
+  "main": "./electron.js",
+  "scripts": {
+    "start": "electron electron.js",
+    "osx": "electron-packager ./ othello --platform=darwin --arch=x64 --electron-version=2.0.5 --icon=./icon.icns --out=../ --overwrite"
+  },
+  "dependencies": {
+    "about-window": "^1.12.1",
+    "electron": "^4.0.0",
+    "electron-updater": "^4.0.6",
+    "electron-window-state": "^5.0.3",
+    "find-free-port": "^2.0.0",
+    "http": "^0.0.0",
+    "ngrok": "^3.1.0",
+    "node-static": "^0.7.11",
+    "open": "^0.0.5",
+    "socket.io": "^2.2.0",
+    "uuid": "^3.3.2"
+  }
+}

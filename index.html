@@ -2,78 +2,85 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link href="https://fonts.googleapis.com/css?family=Geo" rel="stylesheet" />
   <title>othello</title>
-  <link rel="stylesheet" type="text/css" media="screen" href="index.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="index.css" />
+  <script src="jquery.js"></script>
+  <script src="URI.min.js"></script>
+  <script src="socket.io/socket.io.js"></script>
 </head>
 <body>
-  <script src="jquery.js"></script>
-  <div id="othello">
-    <div class="square"><div id="s11" class="stone">1</div></div>
-    <div class="square"><div id="s12" class="stone">2</div></div>
-    <div class="square"><div id="s13" class="stone">3</div></div>
-    <div class="square"><div id="s14" class="stone">4</div></div>
-    <div class="square"><div id="s15" class="stone">5</div></div>
-    <div class="square"><div id="s16" class="stone">6</div></div>
-    <div class="square"><div id="s17" class="stone">7</div></div>
-    <div class="square"><div id="s18" class="stone">8</div></div>
-    <div class="square"><div id="s21" class="stone">2</div></div>
-    <div class="square"><div id="s22" class="stone"></div></div>
-    <div class="square"><div id="s23" class="stone"></div></div>
-    <div class="square"><div id="s24" class="stone"></div></div>
-    <div class="square"><div id="s25" class="stone"></div></div>
-    <div class="square"><div id="s26" class="stone"></div></div>
-    <div class="square"><div id="s27" class="stone"></div></div>
-    <div class="square"><div id="s28" class="stone"></div></div>
-    <div class="square"><div id="s31" class="stone">3</div></div>
-    <div class="square"><div id="s32" class="stone"></div></div>
-    <div class="square"><div id="s33" class="stone"></div></div>
-    <div class="square"><div id="s34" class="stone"></div></div>
-    <div class="square"><div id="s35" class="stone"></div></div>
-    <div class="square"><div id="s36" class="stone"></div></div>
-    <div class="square"><div id="s37" class="stone"></div></div>
-    <div class="square"><div id="s38" class="stone"></div></div>
-    <div class="square"><div id="s41" class="stone">4</div></div>
-    <div class="square"><div id="s42" class="stone"></div></div>
-    <div class="square"><div id="s43" class="stone"></div></div>
-    <div class="square"><div id="s44" class="stone"></div></div>
-    <div class="square"><div id="s45" class="stone"></div></div>
-    <div class="square"><div id="s46" class="stone"></div></div>
-    <div class="square"><div id="s47" class="stone"></div></div>
-    <div class="square"><div id="s48" class="stone"></div></div>
-    <div class="square"><div id="s51" class="stone">5</div></div>
-    <div class="square"><div id="s52" class="stone"></div></div>
-    <div class="square"><div id="s53" class="stone"></div></div>
-    <div class="square"><div id="s54" class="stone"></div></div>
-    <div class="square"><div id="s55" class="stone"></div></div>
-    <div class="square"><div id="s56" class="stone"></div></div>
-    <div class="square"><div id="s57" class="stone"></div></div>
-    <div class="square"><div id="s58" class="stone"></div></div>
-    <div class="square"><div id="s61" class="stone">6</div></div>
-    <div class="square"><div id="s62" class="stone"></div></div>
-    <div class="square"><div id="s63" class="stone"></div></div>
-    <div class="square"><div id="s64" class="stone"></div></div>
-    <div class="square"><div id="s65" class="stone"></div></div>
-    <div class="square"><div id="s66" class="stone"></div></div>
-    <div class="square"><div id="s67" class="stone"></div></div>
-    <div class="square"><div id="s68" class="stone"></div></div>
-    <div class="square"><div id="s71" class="stone">7</div></div>
-    <div class="square"><div id="s72" class="stone"></div></div>
-    <div class="square"><div id="s73" class="stone"></div></div>
-    <div class="square"><div id="s74" class="stone"></div></div>
-    <div class="square"><div id="s75" class="stone"></div></div>
-    <div class="square"><div id="s76" class="stone"></div></div>
-    <div class="square"><div id="s77" class="stone"></div></div>
-    <div class="square"><div id="s78" class="stone"></div></div>
-    <div class="square"><div id="s81" class="stone">8</div></div>
-    <div class="square"><div id="s82" class="stone"></div></div>
-    <div class="square"><div id="s83" class="stone"></div></div>
-    <div class="square"><div id="s84" class="stone"></div></div>
-    <div class="square"><div id="s85" class="stone"></div></div>
-    <div class="square"><div id="s86" class="stone"></div></div>
-    <div class="square"><div id="s87" class="stone"></div></div>
-    <div class="square"><div id="s88" class="stone"></div></div>
+  <div class="wrapper black">
+    <main>
+      <div id="othello">
+        <div data-num="1" class="square"><div id="s11" class="stone"></div></div>
+        <div data-num="2" class="square"><div id="s12" class="stone"></div></div>
+        <div data-num="3" class="square"><div id="s13" class="stone"></div></div>
+        <div data-num="4" class="square"><div id="s14" class="stone"></div></div>
+        <div data-num="5" class="square"><div id="s15" class="stone"></div></div>
+        <div data-num="6" class="square"><div id="s16" class="stone"></div></div>
+        <div data-num="7" class="square"><div id="s17" class="stone"></div></div>
+        <div data-num="8" class="square"><div id="s18" class="stone"></div></div>
+        <div data-num="2" class="square"><div id="s21" class="stone"></div></div>
+        <div class="square"><div id="s22" class="stone"></div></div>
+        <div class="square"><div id="s23" class="stone"></div></div>
+        <div class="square"><div id="s24" class="stone"></div></div>
+        <div class="square"><div id="s25" class="stone"></div></div>
+        <div class="square"><div id="s26" class="stone"></div></div>
+        <div class="square"><div id="s27" class="stone"></div></div>
+        <div class="square"><div id="s28" class="stone"></div></div>
+        <div data-num="3" class="square"><div id="s31"  class="stone"></div></div>
+        <div class="square"><div id="s32" class="stone"></div></div>
+        <div class="square"><div id="s33" class="stone"></div></div>
+        <div class="square"><div id="s34" class="stone"></div></div>
+        <div class="square"><div id="s35" class="stone"></div></div>
+        <div class="square"><div id="s36" class="stone"></div></div>
+        <div class="square"><div id="s37" class="stone"></div></div>
+        <div class="square"><div id="s38" class="stone"></div></div>
+        <div data-num="4" class="square"><div id="s41" class="stone"></div></div>
+        <div class="square"><div id="s42" class="stone"></div></div>
+        <div class="square"><div id="s43" class="stone"></div></div>
+        <div class="square"><div id="s44" class="stone"></div></div>
+        <div class="square"><div id="s45" class="stone"></div></div>
+        <div class="square"><div id="s46" class="stone"></div></div>
+        <div class="square"><div id="s47" class="stone"></div></div>
+        <div class="square"><div id="s48" class="stone"></div></div>
+        <div data-num="5" class="square"><div id="s51" class="stone"></div></div>
+        <div class="square"><div id="s52" class="stone"></div></div>
+        <div class="square"><div id="s53" class="stone"></div></div>
+        <div class="square"><div id="s54" class="stone"></div></div>
+        <div class="square"><div id="s55" class="stone"></div></div>
+        <div class="square"><div id="s56" class="stone"></div></div>
+        <div class="square"><div id="s57" class="stone"></div></div>
+        <div class="square"><div id="s58" class="stone"></div></div>
+        <div data-num="6" class="square"><div id="s61" class="stone"></div></div>
+        <div class="square"><div id="s62" class="stone"></div></div>
+        <div class="square"><div id="s63" class="stone"></div></div>
+        <div class="square"><div id="s64" class="stone"></div></div>
+        <div class="square"><div id="s65" class="stone"></div></div>
+        <div class="square"><div id="s66" class="stone"></div></div>
+        <div class="square"><div id="s67" class="stone"></div></div>
+        <div class="square"><div id="s68" class="stone"></div></div>
+        <div data-num="7" class="square"><div id="s71" class="stone"></div></div>
+        <div class="square"><div id="s72" class="stone"></div></div>
+        <div class="square"><div id="s73" class="stone"></div></div>
+        <div class="square"><div id="s74" class="stone"></div></div>
+        <div class="square"><div id="s75" class="stone"></div></div>
+        <div class="square"><div id="s76" class="stone"></div></div>
+        <div class="square"><div id="s77" class="stone"></div></div>
+        <div class="square"><div id="s78" class="stone"></div></div>
+        <div data-num="8" class="square"><div id="s81" class="stone"></div></div>
+        <div class="square"><div id="s82" class="stone"></div></div>
+        <div class="square"><div id="s83" class="stone"></div></div>
+        <div class="square"><div id="s84" class="stone"></div></div>
+        <div class="square"><div id="s85" class="stone"></div></div>
+        <div class="square"><div id="s86" class="stone"></div></div>
+        <div class="square"><div id="s87" class="stone"></div></div>
+        <div class="square"><div id="s88" class="stone"></div></div>
+      </div>
+    </main>
   </div>
 
   <script src="index.js"></script>
